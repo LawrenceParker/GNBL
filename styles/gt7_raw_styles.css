@@ -42,3 +42,12 @@
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+
+.table-error {
+  background: #ffefef;
+  color: #b30000;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #ffb3b3;
+}
