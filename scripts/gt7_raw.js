@@ -1,20 +1,38 @@
-fetch('/data/WNC_GT7_RAW.csv')
-  .then(response => response.text())
+function showTableError(message) {
+  const table = document.getElementById('csv-table');
+  table.innerHTML = `
+    <tr>
+      <td colspan="99" class="table-error">${message}</td>
+    </tr>
+  `;
+}
+
+fetch('data/WNC_GT7_RAW.csv')
+  .then(response => {
+    if (!response.ok) {
+      showTableError("Error: CSV file not found.");
+      throw new Error("CSV not found");
+    }
+    return response.text();
+  })
   .then(csvText => {
     Papa.parse(csvText, {
       header: true,
+      skipEmptyLines: true,
+      error: function(err) {
+        showTableError("Error parsing CSV: " + err.message);
+      },
       complete: function(results) {
         const data = results.data;
 
-        // Create container
-        const container = document.createElement('div');
-        container.className = 'table-container';
+        if (!data.length) {
+          showTableError("Error: CSV file is empty.");
+          return;
+        }
 
         const table = document.getElementById('csv-table');
-        container.appendChild(table);
-        table.parentNode.insertBefore(container, table);
 
-        // Create header
+        // Build header
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
 
@@ -27,7 +45,7 @@ fetch('/data/WNC_GT7_RAW.csv')
         thead.appendChild(headerRow);
         table.appendChild(thead);
 
-        // Create body
+        // Build body
         const tbody = document.createElement('tbody');
 
         data.forEach(row => {
@@ -43,4 +61,7 @@ fetch('/data/WNC_GT7_RAW.csv')
         table.appendChild(tbody);
       }
     });
+  })
+  .catch(err => {
+    showTableError("Network error loading CSV.");
   });
