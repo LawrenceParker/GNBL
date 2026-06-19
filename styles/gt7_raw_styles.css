@@ -1,3 +1,37 @@
+/* Top Navigation Bar */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1e1e1e;
+  padding: 12px 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 1000;
+  border-bottom: 2px solid #444;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.top-nav a:hover {
+  background: #333;
+}
+
+/* Spacer so content doesn't hide under the fixed nav */
+.nav-spacer {
+  height: 55px;
+}
+
+
 .styled-table {
   width: 100%;
   border-collapse: collapse;
