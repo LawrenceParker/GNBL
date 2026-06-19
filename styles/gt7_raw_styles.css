@@ -41,16 +41,16 @@
   border: 1px solid #ccc; /* Outer border */
 }
 
-/* Sticky header */
 .styled-table thead th {
   position: sticky;
-  top: 0;
+  top: 55px; /* Push header below the nav bar */
   background: #1e1e1e;
   color: white;
   padding: 12px;
-  border: 1px solid #ccc; /* Header grid lines */
+  border: 1px solid #ccc;
   z-index: 2;
 }
+
 
 /* Body cells */
 .styled-table td {
